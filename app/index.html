@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="/images/icon.png">
+
+        <title>TO DO!</title>
+
+        <!-- Bootstrap -->
+        <link href="scripts/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- The main CSS file -->
+        <link href="css/style.css" rel="stylesheet" />
+
+    </head>
+
+    <body>
+
+        <section id="app">
+            <header>
+                <h1>TO DO!</h1>
+                <form id="taskForm" action="#">
+                    <div class="input-append">
+                        <input id="newTask" type="text" placeholder="Your new task">
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
+                    <br>
+                    <label class="checkbox inline lowImp">
+                        <input type="radio" name="importance" value="0" checked="checked"> normal
+                    </label>
+                    <label class="checkbox inline midImp">
+                        <input type="radio" name="importance" value="1"> important
+                    </label>
+                    <label class="checkbox inline highImp">
+                        <input type="radio" name="importance" value="2"> critical
+                    </label>
+                </form>
+                <hr>
+                <section id="tasks">
+                    <!-- Populated tasks -->
+                </section>
+            </header>
+        </section>
+
+        <!-- JavaScript Includes -->
+        <script src="scripts/vendor/jquery.js" ></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="scripts/vendor/underscore.js"></script>
+        <script src="scripts/vendor/backbone.js"></script>
+        <script src="scripts/vendor/backbone.io/backbone.iosync.min.js"></script>
+        <script src="scripts/vendor/backbone.io/backbone.iobind.min.js"></script>
+
+        <script src="scripts/app.js"></script>
+
+        <script type="text/template" id="taskTemplate">
+            <div class="view">
+                <input class="taskCheckbox" type="checkbox" <%= checked ? 'checked="checked"' : '' %> />
+                <span><%- title %></span>
+                <i class="icon-remove removeTask"></i>
+            </div>
+            <form class="editTaskForm">
+                 <div class="input-append nameField">
+                        <input class="taskTitleEditInput" type="text" value="<%- title %>" />
+                        <button type="submit" class="btn">OK</button>
+                        <button class="btn btn-warning closeEditMode">
+                            <i class="icon-remove icon-white"></i>
+                        </button>
+                    </div>
+                <label class="checkbox inline lowImp">
+                    <input type="radio" name="importance" value="0"> normal
+                </label>
+                <label class="checkbox inline midImp">
+                    <input type="radio" name="importance" value="1"> important
+                </label>
+                <label class="checkbox inline highImp">
+                    <input type="radio" name="importance" value="2"> critical
+                </label>
+            </form>
+        </script>
+
+
+    </body>
+</html>
