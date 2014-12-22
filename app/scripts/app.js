@@ -69,7 +69,8 @@ $(function(){
     */
     App.Collections.Tasks = Backbone.Collection.extend({
         url: 'tasks',
-        
+        filterString: '',
+
         initialize: function () {
             // bind create event from the server
             this.ioBind('create', window.socket, this.serverCreate, this);
@@ -82,6 +83,22 @@ $(function(){
               this.add(task);
             }
         },
+
+        byName: function(name) {
+            this.filterString = name;
+            this.trigger('filtered');
+        },
+
+        match: function(){
+            var filter = this.filterString;
+            
+            var filtered = this.filter(function(task) {
+                return task.get('title').toLowerCase().indexOf(filter.toLowerCase()) != -1;
+            });
+            
+            return filtered;
+        },
+
 
         // Will hold objects of the Task model
         model: App.Models.Task
@@ -189,6 +206,7 @@ $(function(){
         initialize: function(){
             //listen the add event
             this.listenTo(this.collection, 'add', this.addOne);
+            this.listenTo(this.collection, 'filtered', this.render);
         },
 
         addOne: function(model){
@@ -199,8 +217,8 @@ $(function(){
         },
 
         render: function(){
-            //render all collection's elements
-            this.collection.forEach(this.addOne, this);
+            this.$el.html('');
+            this.collection.match().forEach(this.addOne, this);
             return this;
         }
     });
@@ -214,7 +232,8 @@ $(function(){
         el: $('#app'),
 
         events: {
-          "submit #taskForm":  "createOnEnter"
+          "submit #taskForm":  "createOnEnter",
+          'keyup #searchbox': 'filterTasks'
         },
 
         initialize: function(){
@@ -245,6 +264,11 @@ $(function(){
             _task.save();
             // empty the title field
             titleInput.val('');
+        },
+
+        filterTasks: function(e){
+            var filter = e.currentTarget.value;
+            this.tasks.byName(filter);
         }
 
     });
