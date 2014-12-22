@@ -25,6 +25,8 @@
                         <input id="newTask" type="text" placeholder="Your new task">
                         <button type="submit" class="btn btn-primary">OK</button>
                     </div>
+
+
                     <br>
                     <label class="checkbox inline lowImp">
                         <input type="radio" name="importance" value="0" checked="checked"> normal
@@ -36,11 +38,10 @@
                         <input type="radio" name="importance" value="2"> critical
                     </label>
                 </form>
-                <hr>
-                <section id="tasks">
-                    <!-- Populated tasks -->
-                </section>
             </header>
+            <section id="tasks">
+                <!-- Populated tasks -->
+            </section>
         </section>
 
         <!-- JavaScript Includes -->
@@ -57,7 +58,7 @@
             <div class="view">
                 <input class="taskCheckbox" type="checkbox" <%= checked ? 'checked="checked"' : '' %> />
                 <span><%- title %></span>
-                <i class="icon-remove removeTask"></i>
+                <i class="icon-remove icon-white removeTask"></i>
             </div>
             <form class="editTaskForm">
                  <div class="input-append nameField">

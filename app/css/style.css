@@ -1,7 +1,14 @@
 body{
 	text-align: center;;
-	padding: 1em;
-	background-image: url('/images/dot.png');
+	padding: 0;
+	
+}
+
+header{
+	background: #ECF0F1;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-bottom: 40px;
 }
 
 #taskForm div.input-append {
@@ -10,12 +17,12 @@ body{
 
 #tasks .alert {
     margin: auto auto 1em;
-    max-width: 24em;
-    padding-right: 0.7em;
-    text-align: left;
-    border-radius: 0;
-    border: 1px solid #AAAAAA;
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+	max-width: 34em;
+	font-weight: bold;
+	text-align: left;
+	font-size: 15px;
+	padding: 20px 25px 20px 25px;
+	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 #tasks .alert-success span {
@@ -24,6 +31,7 @@ body{
 
 #tasks input {
     vertical-align: top;
+    margin-right: 10px;
 }
 
 #taskForm label.checkbox input{
@@ -56,14 +64,33 @@ body{
 }
 
 #newTask {
-	border-radius: 0;
-	border: 1px solid #777777;
+	padding: 10px 20px 10px 20px;
 }
 
 #taskForm div.input-append button.btn {
-	border-radius: 0;
+	padding: 10px 20px 10px 20px;
 }
 
 .btn, button, input {
-	border-radius: 0 !important;
+	
+}
+
+.alert.alert-success{
+	background: #DFF0D8;
+	color: #468847;
+}
+
+.alert.alert-info{
+	background: #3498DB;
+	color: white;
+}
+
+.alert.alert-warning{
+	background: #E67E22;
+	color: white; 
+}
+
+.alert.alert-error{
+	background: #C0392B;
+	color: white;
 }
