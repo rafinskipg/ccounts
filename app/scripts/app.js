@@ -41,7 +41,8 @@ $(function(){
         defaults:{
             title: 'New task',
             checked: false,
-            importance: 0
+            importance: 0,
+            index: 0
         },
         
         // Helper function for checking/unchecking a task
@@ -73,6 +74,8 @@ $(function(){
         initialize: function () {
             // bind create event from the server
             this.ioBind('create', window.socket, this.serverCreate, this);
+            this.listenTo(this, 'add', this.updateIndexes);
+            this.listenTo(this, 'remove', this.updateIndexes);
         },
         
         serverCreate: function (task) {
@@ -81,6 +84,16 @@ $(function(){
             if (!exists) {
               this.add(task);
             }
+
+            this.updateIndexes();
+        },
+
+        updateIndexes: function(){
+            var length = this.models.length;
+            this.models.forEach(function(model, index){
+                model.set('index', length);
+                length--;
+            });
         },
 
         // Will hold objects of the Task model
@@ -100,8 +113,8 @@ $(function(){
             'click .taskCheckbox': 'toggleTask',
             'click .removeTask': 'removeTask',
             'click .closeEditMode': 'closeEditMode',
-            "submit .editTaskForm"  : "editTask",
-            "dblclick"  : "editMode"
+            'submit .editTaskForm'  : 'editTask',
+            'dblclick'  : 'editMode'
         },
 
         initialize: function(){
@@ -191,7 +204,7 @@ $(function(){
             this.listenTo(this.collection, 'add', this.addOne);
         },
 
-        addOne: function(model){
+        addOne: function(model, index){
             //create a new collection view
             var taskView = new App.Views.Task({model: model});
             //render the collection

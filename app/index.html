@@ -55,6 +55,7 @@
 
         <script type="text/template" id="taskTemplate">
             <div class="view">
+                <span><%- index %></span>
                 <input class="taskCheckbox" type="checkbox" <%= checked ? 'checked="checked"' : '' %> />
                 <span><%- title %></span>
                 <i class="icon-remove removeTask"></i>
